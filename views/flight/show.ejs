@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Show Details</title>
+  </head>
+  <body>
+    <a href="/allflight">All Flight Page</a>
+    <br /><br /><br />
+    <form action="/show/<%= flight._id %>" method="POST">
+      <a href="/ticket/<%= flight._id %>">Ticket Page</a><br /><br />
+      <label
+        >Airport
+        <select name="airport">
+          <option value="ATL">ATL</option>
+          <option value="DFW">DFW</option>
+          <option value="DEN">DEN</option>
+          <option value="LAX">LAX</option>
+          <option value="SAN">SAN</option>
+        </select> </label
+      ><br />
+      <label
+        >Arrival
+        <input type="datetime-local" name="arrival" /> </label
+      ><br />
+
+      <input type="submit" value="Add Destination" />
+    </form>
+    <br /><br />
+    <% if (flight.destinations.length) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Airport</th>
+          <th>Arrival</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% flight.destinations.forEach(function(f) { %>
+        <tr>
+          <td><%= f.airport %></td>
+          <td><%= f.arrival %></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <% } else { %>
+    <h5>No flight Yet</h5>
+    <% } %>
+
+    <br><br>
+    
+    <h2>Ticket Assigned</h2>
+    
+    
+    <table>
+      <thead>
+        <th>Seat</th>
+        <th>Price</th>
+      </thead>
+      <tbody>
+        <tr>
+          <% flight.ticket.forEach(el => { %>
+          <td><%= el.seat %></td>
+          <td><%= el.price %></td>
+        </tr>
+      <% }) %>
+      </tbody>
+    </table>
+
+
+  </body>
+</html>
